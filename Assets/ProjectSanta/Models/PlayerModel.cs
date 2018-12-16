@@ -10,6 +10,7 @@ namespace ProjectSanta.Models
         internal Transform transform;
         internal Transform camera;
         internal Transform leftHand, rightHand;
+        internal Transform sack;
 
         internal Rigidbody rigidBody;
 
@@ -18,7 +19,7 @@ namespace ProjectSanta.Models
         internal SackController sackController;
         internal ListController listController;
 
-        internal GameObject item;
+        internal ItemController item;
         internal bool HoldingItem { get { return item != null; } }
     
 
@@ -27,9 +28,10 @@ namespace ProjectSanta.Models
             transform = player;
 
             camera = player.Find("Main Camera");
+            this.sack = player.Find("Sack");
+            Debug.Log(sack.name);
             leftHand = camera.Find("Left Hand");
             rightHand = camera.Find("Right Hand");
-
             rigidBody = transform.GetComponent<Rigidbody>();
             //rigidBody.angularDrag = Mathf.Infinity;
             //rigidBody.drag = Mathf.Infinity;

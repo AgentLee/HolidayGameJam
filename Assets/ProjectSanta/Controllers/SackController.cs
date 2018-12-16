@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using ProjectSanta.Models;
 
 namespace ProjectSanta.Controllers
@@ -12,16 +13,37 @@ namespace ProjectSanta.Controllers
         internal SackController(Transform sack)
         {
             sackModel = new SackModel(sack);
+
+            GenerateSack();
+        }
+
+        internal void GenerateSack()
+        {
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/SackItem");
+
+            for(int i = 0; i < Global.SACK_SIZE; ++i)
+            {
+                GameObject go = GameObject.Instantiate<GameObject>(prefab);
+                go.transform.parent = sackModel.itemHolder;
+            }
         }
 
         internal void ShowSack(bool active)
         {
             SackOverflow();
 
-            GameObject[] arr = sackModel.items.ToArray();
-            for(int i = 0; i < arr.Length; ++i)
+            ItemController[] arr = sackModel.items.ToArray();
+            for(int i = 0; i < Global.SACK_SIZE; ++i)
             {
-                Debug.Log("Item " + (i + 1) + ": " + arr[i].name);
+                if (i >= arr.Length)
+                {
+                    sackModel.itemHolder.GetChild(i).GetComponent<Text>().enabled = false;
+                }
+                else
+                {
+                    sackModel.itemHolder.GetChild(i).GetComponent<Text>().enabled = true;
+                    sackModel.itemHolder.GetChild(i).GetComponent<Text>().text = arr[i].Name;
+                }
             }
 
             sackModel.sack.gameObject.SetActive(active);
@@ -38,7 +60,7 @@ namespace ProjectSanta.Controllers
             return false;
         }
 
-        internal void AddToSack(GameObject item)
+        internal void AddToSack(ItemController item)
         {
             if(!SackOverflow())
             {
@@ -51,7 +73,7 @@ namespace ProjectSanta.Controllers
         {
             while(sackModel.items.Count > 0)
             {
-                GameObject item = sackModel.items.Peek();
+                ItemController item = sackModel.items.Peek();
 
                 sackModel.items.Dequeue();
             }

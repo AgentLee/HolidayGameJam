@@ -81,6 +81,7 @@ namespace ProjectSanta.Controllers
         bool mouseDown;
         bool tabDown;
         bool fDown;
+        bool qDown;
 
         internal void CheckMouse()
         {
@@ -113,69 +114,84 @@ namespace ProjectSanta.Controllers
             {
                 fDown = false;
             }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                qDown = true;
+            }
+
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                qDown = false;
+            }
         }
 
+        bool storeItem;
         Ray ray, rayL, rayR;
         internal void Grab()
         {
             if (mouseDown && !playerModel.HoldingItem)
             {
                 ray = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-                rayL = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(1.0f, 0.5f, 0.0f));
-                rayR = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(-1.0f, 0.5f, 0.0f));
+                rayL = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(.75f, 0.5f, 0.0f));
+                rayR = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.25f, 0.5f, 0.0f));
                 Debug.DrawRay(ray.origin, ray.direction * playerModel.grabDistance, Color.blue);
                 Debug.DrawRay(rayL.origin, rayL.direction * playerModel.grabDistance, Color.green);
                 Debug.DrawRay(rayR.origin, rayR.direction * playerModel.grabDistance, Color.red);
 
-                Vector3 pointL = rayL.origin + (rayL.direction * playerModel.grabDistance);
-                Vector3 pointR = rayR.origin + (rayR.direction * playerModel.grabDistance);
-                //foreach (Transform t in References.sceneController.items)
-                //{
-                //    float distL = Vector3.Distance(t.position, pointL);
-                //    float distR = Vector3.Distance(t.position, pointR);
-
-                //    float dist = Vector3.Distance(playerModel.transform.position, t.position);
-
-                //    if(dist <= playerModel.grabDistance)
-                //    {
-                //        Debug.Log("PICK ME UP");
-                //    }
-                //}
-
-
                 RaycastHit hit;
                 bool intersects = Physics.Raycast(ray, out hit, playerModel.grabDistance);
 
-                Transform item = hit.transform;
                 if (intersects)
                 {
+                    Transform item = hit.transform;
                     if (item.tag == "Item")
                     {
-                        playerModel.sackController.AddToSack(item.gameObject);
+                        ItemController ic = References.sceneController.Find(item.name);
 
-                        Debug.Log("GRAB ITEM");
+                        if(ic != null)
+                        {
 
-                        playerModel.item = item.gameObject;
-                        playerModel.item.transform.parent = playerModel.rightHand;
-                        playerModel.item.transform.position = playerModel.rightHand.Find("Item").position;
-                        playerModel.item.GetComponent<Rigidbody>().useGravity = false;
-                        playerModel.item.GetComponent<Rigidbody>().freezeRotation = true;
-                        playerModel.item.GetComponent<Rigidbody>().detectCollisions = false;
+                            Debug.Log("GRAB ITEM");
+
+                            playerModel.item = ic;
+                            playerModel.item.itemModel.transform.parent = playerModel.rightHand;
+                            playerModel.item.itemModel.transform.position = playerModel.rightHand.Find("Item").position;
+
+                            ic.PickedUp();
+                        }
                     }
                 }
             }
 
             if (mouseDown && playerModel.HoldingItem)
             {
-                playerModel.item.transform.position = playerModel.rightHand.Find("Item").position;
+                playerModel.item.itemModel.transform.position = playerModel.rightHand.Find("Item").position;
+
+                if(qDown)
+                {
+                    playerModel.item.itemModel.transform.parent = playerModel.sack;
+                    //Debug.Log("PARENT: " + playerModel.item.transform.parent.name);
+                    storeItem = true;
+                    playerModel.item.itemModel.transform.gameObject.SetActive(false);
+                }
             }
 
             if (!mouseDown && playerModel.HoldingItem)
             {
-                playerModel.item.GetComponent<Rigidbody>().useGravity = true;
-                playerModel.item.GetComponent<Rigidbody>().freezeRotation = false;
-                playerModel.item.GetComponent<Rigidbody>().detectCollisions = true;
-                playerModel.item.transform.parent = GameObject.Find("House").transform;
+                playerModel.item.Dropped();
+
+                if(storeItem)
+                {
+                    // logic is kinda funky here...
+                    playerModel.sackController.AddToSack(playerModel.item);
+                    storeItem = false;
+                }
+                else
+                {
+                    playerModel.item.itemModel.transform.parent = GameObject.Find("House").transform;
+                }
+
                 playerModel.item = null;
             }
         }

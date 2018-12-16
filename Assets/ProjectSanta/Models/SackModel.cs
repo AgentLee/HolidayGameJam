@@ -1,20 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectSanta.Controllers;
 
 namespace ProjectSanta.Models
 {
     internal class SackModel
     {
-        internal Queue<GameObject> items;
+        internal Queue<ItemController> items;
 
-        internal Transform sack;
+        internal Transform sack, itemHolder;
 
         internal SackModel(Transform sack)
         {
-            items = new Queue<GameObject>();
+            items = new Queue<ItemController>();
 
             this.sack = sack;
+            itemHolder = sack.Find("ItemHolder");
         }
     }
 }
