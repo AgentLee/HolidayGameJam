@@ -13,6 +13,7 @@ namespace ProjectSanta.Models
         internal Transform sack;
 
         internal Rigidbody rigidBody;
+        internal Animator animator;
 
         internal float grabDistance;
         internal float highlightDistance;
@@ -35,7 +36,7 @@ namespace ProjectSanta.Models
             rigidBody = transform.GetComponent<Rigidbody>();
             //rigidBody.angularDrag = Mathf.Infinity;
             //rigidBody.drag = Mathf.Infinity;
-
+            animator = rightHand.Find("Mitten").GetComponent<Animator>();
             grabDistance = 2.5f;
             highlightDistance = 10f;
 

@@ -130,6 +130,12 @@ namespace ProjectSanta.Controllers
         Ray ray, rayL, rayR;
         internal void Grab()
         {
+            playerModel.animator.SetBool("mouseDown", mouseDown);
+            if(mouseDown)
+            {
+                playerModel.animator.Play("Close");
+            }
+
             if (mouseDown && !playerModel.HoldingItem)
             {
                 ray = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));

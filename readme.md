@@ -7,3 +7,6 @@
 - Conveyor belt interaction
     - Make sure the gifts match the list
 - Point system
+- Animations
+    - ~~Glove~~
+    - Conveyor belt
