@@ -9,15 +9,18 @@ namespace ProjectSanta.Controllers
         PlayerController playerController;
         SceneController sceneController;
 
-        internal InitializeController(Transform player, Transform house)
+        internal InitializeController(Transform player, Transform house, Transform list, Transform sack)
         {
-            playerController = new PlayerController(player);
+            playerController = new PlayerController(player, sack, list);
             sceneController = new SceneController(house);
+
+            References.initializeController = this;
         }
 
         public void Update()
         {
             playerController.Update();
+            sceneController.Update();
         }
     }
 }

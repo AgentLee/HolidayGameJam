@@ -9,12 +9,12 @@ namespace ProjectSanta.Controllers
     {
         internal SackModel sackModel;
 
-        internal SackController()
+        internal SackController(Transform sack)
         {
-            sackModel = new SackModel();
+            sackModel = new SackModel(sack);
         }
 
-        internal void ShowSack()
+        internal void ShowSack(bool active)
         {
             SackOverflow();
 
@@ -23,6 +23,8 @@ namespace ProjectSanta.Controllers
             {
                 Debug.Log("Item " + (i + 1) + ": " + arr[i].name);
             }
+
+            sackModel.sack.gameObject.SetActive(active);
         }
 
         internal bool SackOverflow()

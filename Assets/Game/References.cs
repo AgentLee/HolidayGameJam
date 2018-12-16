@@ -1,18 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectSanta.Controllers;
 
-public class References : MonoBehaviour
+namespace ProjectSanta
 {
-    // Start is called before the first frame update
-    void Start()
+    internal static class References
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        internal static InitializeController initializeController;
+        internal static PlayerController playerController;
+        internal static SceneController sceneController;
     }
 }

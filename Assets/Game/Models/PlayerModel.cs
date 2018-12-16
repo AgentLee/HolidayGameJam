@@ -14,13 +14,15 @@ namespace ProjectSanta.Models
         internal Rigidbody rigidBody;
 
         internal float grabDistance;
+        internal float highlightDistance;
         internal SackController sackController;
+        internal ListController listController;
 
         internal GameObject item;
         internal bool HoldingItem { get { return item != null; } }
     
 
-        internal PlayerModel(Transform player)
+        internal PlayerModel(Transform player, Transform sack, Transform list)
         {
             transform = player;
 
@@ -33,8 +35,10 @@ namespace ProjectSanta.Models
             //rigidBody.drag = Mathf.Infinity;
 
             grabDistance = 2.5f;
+            highlightDistance = 10f;
 
-            sackController = new SackController();
+            sackController = new SackController(sack);
+            listController = new ListController(list);
 
             item = null;
         }

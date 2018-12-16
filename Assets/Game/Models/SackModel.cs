@@ -8,9 +8,13 @@ namespace ProjectSanta.Models
     {
         internal Queue<GameObject> items;
 
-        internal SackModel()
+        internal Transform sack;
+
+        internal SackModel(Transform sack)
         {
             items = new Queue<GameObject>();
+
+            this.sack = sack;
         }
     }
 }

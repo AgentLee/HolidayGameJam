@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ProjectSanta.Models;
 using UnityEngine.XR;
+using ProjectSanta;
 
 namespace ProjectSanta.Controllers
 {
@@ -21,9 +22,27 @@ namespace ProjectSanta.Controllers
         float speed = 5f;
         float lookSensitivity = 3f;
 
-        internal PlayerController(Transform player)
+        internal Vector3 Position
         {
-            playerModel = new PlayerModel(player);
+            get
+            {
+                return playerModel.transform.position;
+            }
+        }
+
+        internal float HighlightDistance
+        {
+            get
+            {
+                return playerModel.highlightDistance;
+            }
+        }
+
+        internal PlayerController(Transform player, Transform sack, Transform list)
+        {
+            playerModel = new PlayerModel(player, sack, list);
+
+            References.playerController = this;
         }
 
         internal void StandardMove()
@@ -61,6 +80,7 @@ namespace ProjectSanta.Controllers
 
         bool mouseDown;
         bool tabDown;
+        bool fDown;
 
         internal void CheckMouse()
         {
@@ -74,7 +94,7 @@ namespace ProjectSanta.Controllers
                 mouseDown = false;
             }
 
-            if(Input.GetKey(KeyCode.Tab))
+            if(Input.GetKeyDown(KeyCode.Tab))
             {
                 tabDown = true;
             }
@@ -83,23 +103,53 @@ namespace ProjectSanta.Controllers
             {
                 tabDown = false;
             }
+
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                fDown = true;
+            }
+
+            if (Input.GetKeyUp(KeyCode.F))
+            {
+                fDown = false;
+            }
         }
 
-        Ray ray;
+        Ray ray, rayL, rayR;
         internal void Grab()
         {
-            if(mouseDown && !playerModel.HoldingItem)
+            if (mouseDown && !playerModel.HoldingItem)
             {
                 ray = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+                rayL = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(1.0f, 0.5f, 0.0f));
+                rayR = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(-1.0f, 0.5f, 0.0f));
                 Debug.DrawRay(ray.origin, ray.direction * playerModel.grabDistance, Color.blue);
+                Debug.DrawRay(rayL.origin, rayL.direction * playerModel.grabDistance, Color.green);
+                Debug.DrawRay(rayR.origin, rayR.direction * playerModel.grabDistance, Color.red);
+
+                Vector3 pointL = rayL.origin + (rayL.direction * playerModel.grabDistance);
+                Vector3 pointR = rayR.origin + (rayR.direction * playerModel.grabDistance);
+                //foreach (Transform t in References.sceneController.items)
+                //{
+                //    float distL = Vector3.Distance(t.position, pointL);
+                //    float distR = Vector3.Distance(t.position, pointR);
+
+                //    float dist = Vector3.Distance(playerModel.transform.position, t.position);
+
+                //    if(dist <= playerModel.grabDistance)
+                //    {
+                //        Debug.Log("PICK ME UP");
+                //    }
+                //}
+
 
                 RaycastHit hit;
                 bool intersects = Physics.Raycast(ray, out hit, playerModel.grabDistance);
 
                 Transform item = hit.transform;
-                if(intersects)
+                if (intersects)
                 {
-                    if(item.tag == "Item")
+                    if (item.tag == "Item")
                     {
                         playerModel.sackController.AddToSack(item.gameObject);
 
@@ -115,12 +165,12 @@ namespace ProjectSanta.Controllers
                 }
             }
 
-            if(mouseDown && playerModel.HoldingItem)
+            if (mouseDown && playerModel.HoldingItem)
             {
                 playerModel.item.transform.position = playerModel.rightHand.Find("Item").position;
             }
 
-            if(!mouseDown && playerModel.HoldingItem)
+            if (!mouseDown && playerModel.HoldingItem)
             {
                 playerModel.item.GetComponent<Rigidbody>().useGravity = true;
                 playerModel.item.GetComponent<Rigidbody>().freezeRotation = false;
@@ -132,10 +182,12 @@ namespace ProjectSanta.Controllers
 
         internal void SackStatus()
         {
-            if(tabDown)
-            {
-                playerModel.sackController.ShowSack();
-            }
+            playerModel.sackController.ShowSack(tabDown);
+        }
+
+        internal void ListStatus()
+        {
+            playerModel.listController.ShowList(fDown);
         }
 
         internal void StayGrounded()
@@ -160,6 +212,7 @@ namespace ProjectSanta.Controllers
             //StayGrounded();
             Grab();
             SackStatus();
+            ListStatus();
         }
 
         private void VRLoop()
