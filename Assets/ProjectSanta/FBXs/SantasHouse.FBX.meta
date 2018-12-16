@@ -1,0 +1,243 @@
+fileFormatVersion: 2
+guid: 1df121534cd9acf41a8fd79de910800d
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Banisters
+    100002: Celings
+    100004: DenSuports
+    100006: doorsize
+    100008: Fire Place
+    100010: floor
+    100012: Garadge Door
+    100014: Kitchen Beams
+    100016: Kitchen door Frame
+    100018: 'kitchen trim '
+    100020: Railings
+    100022: Rugs
+    100024: //RootNode
+    100026: SpiralStair
+    100028: UpstairsWalls
+    100030: walls
+    100032: Windows
+    100034: 'Workshop supports '
+    100036: Workshop Trim
+    100038: DenDims1
+    100040: dims
+    100042: Kitchendims
+    100044: WprkShopDims
+    400000: Banisters
+    400002: Celings
+    400004: DenSuports
+    400006: doorsize
+    400008: Fire Place
+    400010: floor
+    400012: Garadge Door
+    400014: Kitchen Beams
+    400016: Kitchen door Frame
+    400018: 'kitchen trim '
+    400020: Railings
+    400022: Rugs
+    400024: //RootNode
+    400026: SpiralStair
+    400028: UpstairsWalls
+    400030: walls
+    400032: Windows
+    400034: 'Workshop supports '
+    400036: Workshop Trim
+    400038: DenDims1
+    400040: dims
+    400042: Kitchendims
+    400044: WprkShopDims
+    2100000: Unimportant parts
+    2100002: Den Walls
+    2100004: Workshop Walls
+    2100006: KitchenWalls
+    2100008: DenUpstairs Floor
+    2100010: WorkshopFloor2
+    2100012: KitchenFloor
+    2100014: WorkshopFloor
+    2100016: DenFloor
+    2100018: DenHalwayFloor
+    2100020: Wood4
+    2100022: Wood3
+    2100024: Metal1
+    2100026: Painted Wood1
+    2100028: Wood2
+    2100030: Wood1
+    2100032: Garadge Door
+    2100034: Spiral stairs
+    2100036: Upstairs
+    2100038: Den Celing
+    2100040: Workshop Celing
+    2100042: Halway Celing
+    2100044: Kitchen Celing
+    2100046: Glass
+    2100048: Rug
+    2300000: Banisters
+    2300002: Celings
+    2300004: DenSuports
+    2300006: doorsize
+    2300008: Fire Place
+    2300010: floor
+    2300012: Garadge Door
+    2300014: Kitchen Beams
+    2300016: Kitchen door Frame
+    2300018: 'kitchen trim '
+    2300020: Railings
+    2300022: Rugs
+    2300024: SpiralStair
+    2300026: UpstairsWalls
+    2300028: walls
+    2300030: Windows
+    2300032: 'Workshop supports '
+    2300034: Workshop Trim
+    2300036: DenDims1
+    2300038: Kitchendims
+    2300040: WprkShopDims
+    3300000: Banisters
+    3300002: Celings
+    3300004: DenSuports
+    3300006: doorsize
+    3300008: Fire Place
+    3300010: floor
+    3300012: Garadge Door
+    3300014: Kitchen Beams
+    3300016: Kitchen door Frame
+    3300018: 'kitchen trim '
+    3300020: Railings
+    3300022: Rugs
+    3300024: SpiralStair
+    3300026: UpstairsWalls
+    3300028: walls
+    3300030: Windows
+    3300032: 'Workshop supports '
+    3300034: Workshop Trim
+    3300036: DenDims1
+    3300038: Kitchendims
+    3300040: WprkShopDims
+    4300000: walls
+    4300002: floor
+    4300004: doorsize
+    4300006: Kitchen Beams
+    4300008: 'kitchen trim '
+    4300010: Kitchen door Frame
+    4300012: 'Workshop supports '
+    4300014: Garadge Door
+    4300016: Fire Place
+    4300018: Workshop Trim
+    4300020: SpiralStair
+    4300022: UpstairsWalls
+    4300024: Celings
+    4300026: Banisters
+    4300028: Railings
+    4300030: DenSuports
+    4300032: Windows
+    4300034: Rugs
+    4300036: WprkShopDims
+    4300038: Kitchendims
+    4300040: DenDims1
+    6400000: Banisters
+    6400002: Celings
+    6400004: DenSuports
+    6400006: doorsize
+    6400008: Fire Place
+    6400010: floor
+    6400012: Garadge Door
+    6400014: Kitchen Beams
+    6400016: Kitchen door Frame
+    6400018: 'kitchen trim '
+    6400020: Railings
+    6400022: Rugs
+    6400024: SpiralStair
+    6400026: UpstairsWalls
+    6400028: walls
+    6400030: Windows
+    6400032: 'Workshop supports '
+    6400034: Workshop Trim
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
