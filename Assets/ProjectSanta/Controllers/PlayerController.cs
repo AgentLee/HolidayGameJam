@@ -13,7 +13,7 @@ namespace ProjectSanta.Controllers
         PlayerModel playerModel;
 
         Vector3 velocity = Vector3.zero;
-        readonly float speed = 5f;
+        readonly float speed = 3f;
         readonly float lookSensitivity = 3f;
 
         Text scoreText;
@@ -48,10 +48,16 @@ namespace ProjectSanta.Controllers
             float moveX = Input.GetAxisRaw("Horizontal");
             float moveZ = Input.GetAxisRaw("Vertical");
 
+
             Vector3 moveHorizontal = playerModel.camera.right * moveX;
             Vector3 moveVertical = playerModel.camera.forward * moveZ;
 
             velocity = (moveHorizontal + moveVertical).normalized * speed;
+
+            if(moveX == 0&& moveZ == 0)
+            {
+                playerModel.rigidBody.velocity = Vector3.zero;
+            }
 
             if(velocity != Vector3.zero)
             {
