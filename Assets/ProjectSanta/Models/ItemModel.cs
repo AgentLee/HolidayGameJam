@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using ProjectSanta.Controllers;
 
 namespace ProjectSanta.Models
 {
@@ -31,6 +32,8 @@ namespace ProjectSanta.Models
         internal int pointValue;
         internal ItemStatus status;
         internal Type type;
+
+        internal PersonController person;
 
         internal ItemModel(Transform transform)
         {
@@ -70,7 +73,21 @@ namespace ProjectSanta.Models
                 highlightColor = Color.blue;
             }
 
-            pointValue = (int)Char.GetNumericValue(transform.name[transform.name.Length - 1]);
+            int count = 0;
+            for(int i = 0; i < transform.name.Length; ++i)
+            {
+                if(transform.name[i] == '_')
+                {
+                    count++;
+                    continue;
+                }
+
+                if(count == 2)
+                {
+                    pointValue = (int)Char.GetNumericValue(transform.name[i]);
+                    break;
+                }
+            }
         }
     }
 }

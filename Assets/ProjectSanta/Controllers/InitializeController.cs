@@ -15,6 +15,7 @@ namespace ProjectSanta.Controllers
             sceneController = new SceneController(house);
 
             References.initializeController = this;
+            References.itemsOnBelt = new List<ItemController>();
         }
 
         public void Update()

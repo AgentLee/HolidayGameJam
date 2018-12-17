@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectSanta.Controllers;
 
 namespace ProjectSanta.Models
 {
@@ -15,10 +16,13 @@ namespace ProjectSanta.Models
 
         internal Transform list, nameHolder;
 
+        internal List<PersonController> people;
+
         internal ListModel(Transform list)
         {
             this.list = list;
             nameHolder = list.Find("NameHolder");
+            people = new List<PersonController>();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using ProjectSanta.Models;
 using UnityEngine.XR;
 using ProjectSanta;
@@ -11,36 +12,33 @@ namespace ProjectSanta.Controllers
     {
         PlayerModel playerModel;
 
-        float minVert = -45.0f;
-        float maxVert = 45.0f;
-        float sensHorizontal = 10.0f;
-        float sensVertical = 10.0f;
-
-        float rotX = 0;
-
         Vector3 velocity = Vector3.zero;
-        float speed = 5f;
-        float lookSensitivity = 3f;
+        readonly float speed = 5f;
+        readonly float lookSensitivity = 3f;
+
+        Text scoreText;
+        internal bool HoldingItem { get { return playerModel.holdingItem; } }
 
         internal Vector3 Position
         {
-            get
-            {
-                return playerModel.transform.position;
-            }
+            get { return playerModel.transform.position; }
         }
 
         internal float HighlightDistance
         {
-            get
-            {
-                return playerModel.highlightDistance;
-            }
+            get { return playerModel.highlightDistance; }
+        }
+
+        internal int Score
+        {
+            get { return playerModel.score; }
+            set { playerModel.score = value; }
         }
 
         internal PlayerController(Transform player, Transform sack, Transform list)
         {
             playerModel = new PlayerModel(player, sack, list);
+            scoreText = GameObject.Find("Score").GetComponent<Text>();
 
             References.playerController = this;
         }
@@ -80,8 +78,8 @@ namespace ProjectSanta.Controllers
 
         bool mouseDown;
         bool tabDown;
-        bool fDown;
         bool qDown;
+        bool rDown;
 
         internal void CheckMouse()
         {
@@ -105,16 +103,6 @@ namespace ProjectSanta.Controllers
                 tabDown = false;
             }
 
-            if(Input.GetKeyDown(KeyCode.F))
-            {
-                fDown = true;
-            }
-
-            if (Input.GetKeyUp(KeyCode.F))
-            {
-                fDown = false;
-            }
-
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 qDown = true;
@@ -124,9 +112,18 @@ namespace ProjectSanta.Controllers
             {
                 qDown = false;
             }
+
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                rDown = true;
+            }
+
+            if (Input.GetKeyUp(KeyCode.R))
+            {
+                rDown = false;
+            }
         }
 
-        bool storeItem;
         Ray ray, rayL, rayR;
         internal void Grab()
         {
@@ -134,82 +131,100 @@ namespace ProjectSanta.Controllers
             if(mouseDown)
             {
                 playerModel.animator.Play("Close");
-            }
 
-            if (mouseDown && !playerModel.HoldingItem)
-            {
-                ray = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-                rayL = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(.75f, 0.5f, 0.0f));
-                rayR = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.25f, 0.5f, 0.0f));
-                Debug.DrawRay(ray.origin, ray.direction * playerModel.grabDistance, Color.blue);
-                Debug.DrawRay(rayL.origin, rayL.direction * playerModel.grabDistance, Color.green);
-                Debug.DrawRay(rayR.origin, rayR.direction * playerModel.grabDistance, Color.red);
-
-                RaycastHit hit;
-                bool intersects = Physics.Raycast(ray, out hit, playerModel.grabDistance);
-
-                if (intersects)
+                // If player isn't holding anything, raycast to pick up nearest object.
+                if(!playerModel.holdingItem)
                 {
-                    Transform item = hit.transform;
-                    if (item.tag == "Item")
+                    ray = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+                    rayL = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(.75f, 0.5f, 0.0f));
+                    rayR = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.25f, 0.5f, 0.0f));
+                    Debug.DrawRay(ray.origin, ray.direction * playerModel.grabDistance, Color.blue);
+                    Debug.DrawRay(rayL.origin, rayL.direction * playerModel.grabDistance, Color.green);
+                    Debug.DrawRay(rayR.origin, rayR.direction * playerModel.grabDistance, Color.red);
+
+                    RaycastHit hit;
+                    bool intersects = Physics.Raycast(ray, out hit, playerModel.grabDistance);
+
+                    if (intersects)
                     {
-                        ItemController ic = References.sceneController.Find(item.name);
-
-                        if(ic != null)
+                        Transform item = hit.transform;
+                        if (item.tag == "Item")
                         {
+                            ItemController ic = References.sceneController.Find(item.name);
 
-                            Debug.Log("GRAB ITEM");
+                            if (ic != null)
+                            {
+                                Debug.Log("GRAB ITEM");
 
-                            playerModel.item = ic;
-                            playerModel.item.itemModel.transform.parent = playerModel.rightHand;
-                            playerModel.item.itemModel.transform.position = playerModel.rightHand.Find("Item").position;
+                                playerModel.item = ic;
+                                playerModel.item.itemModel.transform.parent = playerModel.rightHand;
+                                playerModel.item.itemModel.transform.position = playerModel.rightHand.Find("Item").position;
+                                playerModel.holdingItem = true;
 
-                            ic.PickedUp();
+                                ic.PickedUp();
+                            }
                         }
+                    }
+                }
+                // If player is already holding something, make sure object moves with the player.
+                // If the player presses Q, the item gets prepped to be stored in the sack
+                else
+                {
+                    playerModel.item.itemModel.transform.position = playerModel.rightHand.Find("Item").position;
+
+                    if(qDown)
+                    {
+                        playerModel.item.itemModel.transform.parent = playerModel.sack;
+                        playerModel.storingItem = true;
                     }
                 }
             }
 
-            if (mouseDown && playerModel.HoldingItem)
+            // Store the object in the sack once the player lets go of Q.
+            if(!qDown && playerModel.storingItem)
             {
-                playerModel.item.itemModel.transform.position = playerModel.rightHand.Find("Item").position;
-
-                if(qDown)
-                {
-                    playerModel.item.itemModel.transform.parent = playerModel.sack;
-                    //Debug.Log("PARENT: " + playerModel.item.transform.parent.name);
-                    storeItem = true;
-                    playerModel.item.itemModel.transform.gameObject.SetActive(false);
-                }
+                playerModel.item.Dropped(false);
+                playerModel.sackController.AddToSack(playerModel.item, playerModel.listController);
+                playerModel.storingItem = false;
+                playerModel.holdingItem = false;
             }
 
-            if (!mouseDown && playerModel.HoldingItem)
+            // Player let go of left mouse, if they're holding something, let it go and reparent to the house.
+            if (!mouseDown)
             {
-                playerModel.item.Dropped();
-
-                if(storeItem)
+                if(playerModel.holdingItem)
                 {
-                    // logic is kinda funky here...
-                    playerModel.sackController.AddToSack(playerModel.item);
-                    storeItem = false;
-                }
-                else
-                {
+                    playerModel.item.Dropped(true);
                     playerModel.item.itemModel.transform.parent = GameObject.Find("House").transform;
+                    if(playerModel.item.IsOnConveyor())
+                    {
+                        Debug.Log("ON THE CONVEYOR");
+                    }
+                    playerModel.holdingItem = false;
                 }
 
                 playerModel.item = null;
             }
         }
 
-        internal void SackStatus()
+        internal void EmptySack()
         {
-            playerModel.sackController.ShowSack(tabDown);
+            float dist = Vector3.Distance(Position, GameObject.FindGameObjectWithTag("ConveyorBelt").transform.position);
+            if(rDown && dist <= playerModel.droppingDistance)
+            {
+                playerModel.sackController.EmptySack(this);
+            }
         }
 
-        internal void ListStatus()
+        internal void UpdateScore()
         {
-            playerModel.listController.ShowList(fDown);
+            scoreText.text = Score.ToString();
+        }
+
+        internal void SackStatus()
+        {
+            playerModel.sackController.ShowSack(tabDown, playerModel.listController);
+            playerModel.listController.ShowList(tabDown);
         }
 
         internal void StayGrounded()
@@ -233,8 +248,9 @@ namespace ProjectSanta.Controllers
             StandardLook();
             //StayGrounded();
             Grab();
+            EmptySack();
             SackStatus();
-            ListStatus();
+            UpdateScore();
         }
 
         private void VRLoop()

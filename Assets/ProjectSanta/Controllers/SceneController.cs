@@ -31,7 +31,7 @@ namespace ProjectSanta.Controllers
             foreach(ItemController item in items)
             {
                 float dist = Vector3.Distance(playerPos, item.Position);
-                if(dist <= References.playerController.HighlightDistance)
+                if(dist <= References.playerController.HighlightDistance && References.playerController.HoldingItem)
                 {
                     item.Highlight();
                 }

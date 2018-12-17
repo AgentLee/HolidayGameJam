@@ -10,6 +10,7 @@ namespace ProjectSanta.Models
         internal Queue<ItemController> items;
 
         internal Transform sack, itemHolder;
+        internal int sackPoints;
 
         internal SackModel(Transform sack)
         {
@@ -17,6 +18,8 @@ namespace ProjectSanta.Models
 
             this.sack = sack;
             itemHolder = sack.Find("ItemHolder");
+
+            sackPoints = 0;
         }
     }
 }

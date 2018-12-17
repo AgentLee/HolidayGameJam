@@ -17,12 +17,18 @@ namespace ProjectSanta.Models
 
         internal float grabDistance;
         internal float highlightDistance;
+        internal float droppingDistance;
         internal SackController sackController;
         internal ListController listController;
 
         internal ItemController item;
-        internal bool HoldingItem { get { return item != null; } }
-    
+
+        internal int score;
+
+        //internal bool HoldingItem { get { return HoldingItem; } set { HoldingItem = value; } }
+        //internal bool StoringItem { get { return StoringItem; } set { StoringItem = value; } }
+        internal bool holdingItem;
+        internal bool storingItem;
 
         internal PlayerModel(Transform player, Transform sack, Transform list)
         {
@@ -39,11 +45,16 @@ namespace ProjectSanta.Models
             animator = rightHand.Find("Mitten").GetComponent<Animator>();
             grabDistance = 2.5f;
             highlightDistance = 10f;
+            droppingDistance = 8f;
 
             sackController = new SackController(sack);
             listController = new ListController(list);
 
             item = null;
+            score = 0;
+
+            holdingItem = false;
+            storingItem = false;
         }
     }
 }
