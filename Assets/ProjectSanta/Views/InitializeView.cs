@@ -12,8 +12,10 @@ namespace ProjectSanta.Views
         public Transform house;
         public Transform sack, list;
 
+        public MenuController menuController;
         InitializeController initializeController;
 
+        internal bool pause;
         bool RunGame;
         float timer;
         Text timerText;
@@ -48,7 +50,29 @@ namespace ProjectSanta.Views
 
         private void Update()
         {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                pause = !pause;
+                ShowMenu();
+            }
+
             UpdateTimer();
+        }
+
+        internal void ShowMenu()
+        {
+            menuController.gameObject.SetActive(pause);
+
+            if (pause)
+            {
+                Debug.Log("SHOW MENU");
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+            else
+            {
+                Debug.Log("CLOSE MENU");
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
 
         //https://answers.unity.com/questions/514378/timer-in-milliseconds-to-mmssms.html
@@ -57,7 +81,10 @@ namespace ProjectSanta.Views
             int min = 0;
             int sec = 0;
 
-            timer -= Time.deltaTime;
+            if(!pause)
+            {
+                timer -= Time.deltaTime;
+            }
             if(timer >= 0f)
             {
                 min = Mathf.FloorToInt(timer / 60);
@@ -77,7 +104,7 @@ namespace ProjectSanta.Views
         // Update is called once per frame
         private void FixedUpdate()
         {
-            if(RunGame)
+            if(RunGame && !pause)
                 initializeController.Update();
         }
 

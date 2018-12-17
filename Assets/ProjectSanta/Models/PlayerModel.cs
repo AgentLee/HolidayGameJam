@@ -36,6 +36,7 @@ namespace ProjectSanta.Models
 
             camera = player.Find("Main Camera");
             this.sack = player.Find("Sack");
+
             Debug.Log(sack.name);
             leftHand = camera.Find("Left Hand");
             rightHand = camera.Find("Right Hand");

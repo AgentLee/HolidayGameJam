@@ -76,10 +76,7 @@ namespace ProjectSanta.Controllers
         }
         Vector3 currRotX, currRotY;
 
-        bool mouseDown;
-        bool tabDown;
-        bool qDown;
-        bool rDown;
+        bool mouseDown, tabDown, qDown, rDown;
 
         internal void CheckMouse()
         {
