@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8067505198485320889}
   - component: {fileID: 7422164115646673724}
   - component: {fileID: 1890013560200504019}
+  - component: {fileID: 8136162036652409120}
   - component: {fileID: 6744968360010982624}
   m_Layer: 0
   m_Name: Cookie_Nice_1
@@ -88,11 +89,24 @@ MeshCollider:
   m_GameObject: {fileID: 9019884010090044447}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 501f8b8f5d9616444ac6eca963beb065, type: 3}
+--- !u!65 &8136162036652409120
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9019884010090044447}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.12588714, y: 0.027521428, z: 0.123974614}
+  m_Center: {x: 0.0010384899, y: 0.013834747, z: 0.002699811}
 --- !u!54 &6744968360010982624
 Rigidbody:
   m_ObjectHideFlags: 0

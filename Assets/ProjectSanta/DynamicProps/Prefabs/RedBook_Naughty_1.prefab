@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2886009301718885479}
   - component: {fileID: 7753159340999816919}
   - component: {fileID: 8563188315912442502}
+  - component: {fileID: 156781776503209860}
   - component: {fileID: 9152286409301987270}
   m_Layer: 0
   m_Name: RedBook_Naughty_1
@@ -88,11 +89,24 @@ MeshCollider:
   m_GameObject: {fileID: 3593845491544315025}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: bae429a955eed9448bd324fa3d6921a1, type: 3}
+--- !u!65 &156781776503209860
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3593845491544315025}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2286, y: 0.01778, z: 0.15239999}
+  m_Center: {x: -1.5791813e-17, y: 0.00889, z: 0.0000000037252903}
 --- !u!54 &9152286409301987270
 Rigidbody:
   m_ObjectHideFlags: 0
