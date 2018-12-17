@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
+    path: Assets/ProjectSanta/Scenes/Splash.unity
+    guid: 6f2b4a1613309c14691916a30b960a46
+  - enabled: 0
     path: Assets/ProjectSanta/Scenes/Menu.unity
     guid: c3ede1076555fb8438f39ac55dabbc42
   - enabled: 1

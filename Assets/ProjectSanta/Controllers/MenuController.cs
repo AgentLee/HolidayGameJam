@@ -20,14 +20,14 @@ namespace ProjectSanta.Controllers
             controls.onClick.AddListener(delegate { ShowControls(); });
             back.onClick.AddListener(delegate { ShowControls(); });
 
-#if !UNITY_WEBGL
-            exit.onClick.AddListener(delegate { ExitGame(); });
-#else
+//#if !UNITY_WEBGL
+//            exit.onClick.AddListener(delegate { ExitGame(); });
+//#else
             if (SceneManager.GetActiveScene().name == "Menu")
                 exit.gameObject.SetActive(false);
             else
                 exit.onClick.AddListener(delegate { ExitGame(); });
-#endif
+//#endif
             showMenu = true;
         }
 
