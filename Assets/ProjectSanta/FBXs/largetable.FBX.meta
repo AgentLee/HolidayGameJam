@@ -1,0 +1,362 @@
+fileFormatVersion: 2
+guid: a7cb65c19a82f2449bdb0e43771edb45
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Banisters
+    100002: Bookcase
+    100004: bust_nice_3
+    100006: bustglass_naughty_02
+    100008: busttable_nice_1
+    100010: Celings
+    100012: Chair
+    100014: chair_good_1
+    100016: coocooclock_nice_02
+    100018: DenSuports
+    100020: doorsize
+    100022: Fire Place
+    100024: floor
+    100026: Garadge Door
+    100028: ham_nice_3
+    100030: Kitchen Beams
+    100032: Kitchen door Frame
+    100034: 'kitchen trim '
+    100036: Kitchendims
+    100038: ladder_naughty_2
+    100040: largeplate_nice_1
+    100042: //RootNode
+    100044: log_naughty_1
+    100046: Loveseat
+    100048: Object001
+    100050: Object006
+    100052: painting1_nice_2
+    100054: plate_bad_0
+    100056: Railings
+    100058: Rug
+    100060: Rug2
+    100062: Rugs
+    100064: Shelf
+    100066: smalltable_good_1
+    100068: Sofa
+    100070: SpiralStair
+    100072: squairrug2_naighty_1
+    100074: squairrug_naught_1
+    100076: stocking_nice_1
+    100078: Table
+    100080: UpstairsWalls
+    100082: walls
+    100084: widetable_nice_02
+    100086: Windows
+    100088: 'Workshop supports '
+    100090: Workshop Trim
+    100092: WprkShopDims
+    400000: Banisters
+    400002: Bookcase
+    400004: bust_nice_3
+    400006: bustglass_naughty_02
+    400008: busttable_nice_1
+    400010: Celings
+    400012: Chair
+    400014: chair_good_1
+    400016: coocooclock_nice_02
+    400018: DenSuports
+    400020: doorsize
+    400022: Fire Place
+    400024: floor
+    400026: Garadge Door
+    400028: ham_nice_3
+    400030: Kitchen Beams
+    400032: Kitchen door Frame
+    400034: 'kitchen trim '
+    400036: Kitchendims
+    400038: ladder_naughty_2
+    400040: largeplate_nice_1
+    400042: //RootNode
+    400044: log_naughty_1
+    400046: Loveseat
+    400048: Object001
+    400050: Object006
+    400052: painting1_nice_2
+    400054: plate_bad_0
+    400056: Railings
+    400058: Rug
+    400060: Rug2
+    400062: Rugs
+    400064: Shelf
+    400066: smalltable_good_1
+    400068: Sofa
+    400070: SpiralStair
+    400072: squairrug2_naighty_1
+    400074: squairrug_naught_1
+    400076: stocking_nice_1
+    400078: Table
+    400080: UpstairsWalls
+    400082: walls
+    400084: widetable_nice_02
+    400086: Windows
+    400088: 'Workshop supports '
+    400090: Workshop Trim
+    400092: WprkShopDims
+    2100000: Unimportant parts
+    2100002: Den Walls
+    2100004: Workshop Walls
+    2100006: KitchenWalls
+    2100008: DenUpstairs Floor
+    2100010: WorkshopFloor2
+    2100012: KitchenFloor
+    2100014: WorkshopFloor
+    2100016: DenFloor
+    2100018: DenHalwayFloor
+    2100020: Wood4
+    2100022: Wood3
+    2100024: Metal1
+    2100026: Painted Wood1
+    2100028: Wood2
+    2100030: Wood1
+    2100032: Garadge Door
+    2100034: Spiral stairs
+    2100036: Upstairs
+    2100038: Den Celing
+    2100040: Workshop Celing
+    2100042: Halway Celing
+    2100044: Kitchen Celing
+    2100046: Glass
+    2100048: Rug
+    2100050: Den Chimney
+    2100052: PaintingFrame
+    2100054: Painting
+    2100056: CooCooClock
+    2100058: RoundRug1
+    2100060: Log
+    2100062: Chair
+    2100064: LoveSeat
+    2100066: Sofa
+    2100068: SquairRug1
+    2100070: squairrug2
+    2100072: Large Painting
+    2100074: roundrug2
+    2100076: bustglass
+    2300000: Banisters
+    2300002: Bookcase
+    2300004: bust_nice_3
+    2300006: bustglass_naughty_02
+    2300008: busttable_nice_1
+    2300010: Celings
+    2300012: Chair
+    2300014: chair_good_1
+    2300016: coocooclock_nice_02
+    2300018: DenSuports
+    2300020: doorsize
+    2300022: Fire Place
+    2300024: floor
+    2300026: Garadge Door
+    2300028: ham_nice_3
+    2300030: Kitchen Beams
+    2300032: Kitchen door Frame
+    2300034: 'kitchen trim '
+    2300036: Kitchendims
+    2300038: ladder_naughty_2
+    2300040: largeplate_nice_1
+    2300042: log_naughty_1
+    2300044: Loveseat
+    2300046: Object001
+    2300048: Object006
+    2300050: painting1_nice_2
+    2300052: plate_bad_0
+    2300054: Railings
+    2300056: Rug
+    2300058: Rug2
+    2300060: Rugs
+    2300062: Shelf
+    2300064: smalltable_good_1
+    2300066: Sofa
+    2300068: SpiralStair
+    2300070: squairrug2_naighty_1
+    2300072: squairrug_naught_1
+    2300074: stocking_nice_1
+    2300076: Table
+    2300078: UpstairsWalls
+    2300080: walls
+    2300082: widetable_nice_02
+    2300084: Windows
+    2300086: 'Workshop supports '
+    2300088: Workshop Trim
+    2300090: WprkShopDims
+    3300000: Banisters
+    3300002: Bookcase
+    3300004: bust_nice_3
+    3300006: bustglass_naughty_02
+    3300008: busttable_nice_1
+    3300010: Celings
+    3300012: Chair
+    3300014: chair_good_1
+    3300016: coocooclock_nice_02
+    3300018: DenSuports
+    3300020: doorsize
+    3300022: Fire Place
+    3300024: floor
+    3300026: Garadge Door
+    3300028: ham_nice_3
+    3300030: Kitchen Beams
+    3300032: Kitchen door Frame
+    3300034: 'kitchen trim '
+    3300036: Kitchendims
+    3300038: ladder_naughty_2
+    3300040: largeplate_nice_1
+    3300042: log_naughty_1
+    3300044: Loveseat
+    3300046: Object001
+    3300048: Object006
+    3300050: painting1_nice_2
+    3300052: plate_bad_0
+    3300054: Railings
+    3300056: Rug
+    3300058: Rug2
+    3300060: Rugs
+    3300062: Shelf
+    3300064: smalltable_good_1
+    3300066: Sofa
+    3300068: SpiralStair
+    3300070: squairrug2_naighty_1
+    3300072: squairrug_naught_1
+    3300074: stocking_nice_1
+    3300076: Table
+    3300078: UpstairsWalls
+    3300080: walls
+    3300082: widetable_nice_02
+    3300084: Windows
+    3300086: 'Workshop supports '
+    3300088: Workshop Trim
+    3300090: WprkShopDims
+    4300000: walls
+    4300002: floor
+    4300004: doorsize
+    4300006: Kitchen Beams
+    4300008: 'kitchen trim '
+    4300010: Kitchen door Frame
+    4300012: 'Workshop supports '
+    4300014: Garadge Door
+    4300016: Fire Place
+    4300018: Workshop Trim
+    4300020: SpiralStair
+    4300022: UpstairsWalls
+    4300024: Celings
+    4300026: Banisters
+    4300028: Railings
+    4300030: DenSuports
+    4300032: Windows
+    4300034: Rugs
+    4300036: WprkShopDims
+    4300038: Kitchendims
+    4300040: ham_nice_3
+    4300042: Object001
+    4300044: painting1_nice_2
+    4300046: Bookcase
+    4300048: stocking_nice_1
+    4300050: coocooclock_nice_02
+    4300052: Shelf
+    4300054: Rug
+    4300056: log_naughty_1
+    4300058: Chair
+    4300060: Loveseat
+    4300062: Sofa
+    4300064: squairrug_naught_1
+    4300066: squairrug2_naighty_1
+    4300068: Object006
+    4300070: Rug2
+    4300072: Table
+    4300074: ladder_naughty_2
+    4300076: chair_good_1
+    4300078: smalltable_good_1
+    4300080: widetable_nice_02
+    4300082: bust_nice_3
+    4300084: busttable_nice_1
+    4300086: bustglass_naughty_02
+    4300088: plate_bad_0
+    4300090: largeplate_nice_1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
