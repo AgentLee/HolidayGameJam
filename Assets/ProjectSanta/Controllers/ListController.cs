@@ -25,7 +25,9 @@ namespace ProjectSanta.Controllers
         internal void UpdateList(int idx)
         {
             listModel.people[idx].GiftAssigned = true;
-            listModel.nameHolder.GetChild(idx).Find("Name").GetComponent<Text>().text += " done";
+            Color c = listModel.nameHolder.GetChild(idx).Find("Name").GetComponent<Text>().color;
+            c.a = 0.25f;
+            listModel.nameHolder.GetChild(idx).Find("Name").GetComponent<Text>().color = c;
         }
 
         internal void GenerateList()

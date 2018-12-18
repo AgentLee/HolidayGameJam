@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class SplashController : MonoBehaviour
 {
-    public Image splash;
-    float alpha = 0;
+    public Image splash, scroll;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,29 +16,43 @@ public class SplashController : MonoBehaviour
 
     IEnumerator Fade()
     {
-        while(alpha <= 1f)
+        Coroutine splashFade = StartCoroutine(FadeImage(splash));
+
+        yield return splashFade;
+        
+        Coroutine scrollFade = StartCoroutine(FadeImage(scroll));
+
+        yield return scrollFade;
+
+        SceneManager.LoadScene("Menu");
+    }
+
+    IEnumerator FadeImage(Image img)
+    {
+        float alpha = 0;
+        while (alpha <= 1f)
         {
             alpha += 0.05f;
-            Color c = splash.color;
+            Color c = img.color;
             c.a = alpha;
-            splash.color = c;
+            img.color = c;
 
             yield return new WaitForSeconds(0.05f);
         }
 
         yield return new WaitForSeconds(2f);
 
-        while(alpha > 0)
+        while (alpha > 0)
         {
             alpha -= 0.05f;
-            Color c = splash.color;
+            Color c = img.color;
             c.a = alpha;
-            splash.color = c;
+            img.color = c;
 
             yield return new WaitForSeconds(0.05f);
         }
 
-        SceneManager.LoadScene("Menu");
+        yield return new WaitForSeconds(1f);
     }
 
 }

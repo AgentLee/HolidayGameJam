@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using ProjectSanta.Controllers;
 
@@ -13,6 +14,8 @@ namespace ProjectSanta.Views
         public Transform sack, list;
 
         public MenuController menuController;
+        public Transform endGame;
+
         InitializeController initializeController;
 
         internal bool pause;
@@ -35,6 +38,9 @@ namespace ProjectSanta.Views
             crosshair = Resources.Load<Texture2D>("UI/Retical");
             //crosshair.Resize(crosshair.width * 20, crosshair.height * 20);
             //crosshair.Apply();
+
+            endGame.Find("Button").GetComponent<Button>().onClick.AddListener(delegate { SceneManager.LoadScene("Menu"); });
+            endGame.gameObject.SetActive(false);
 
             References.initializeView = this;
         }
@@ -65,12 +71,10 @@ namespace ProjectSanta.Views
 
             if (pause)
             {
-                Debug.Log("SHOW MENU");
                 Cursor.lockState = CursorLockMode.Confined;
             }
             else
             {
-                Debug.Log("CLOSE MENU");
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
@@ -104,8 +108,15 @@ namespace ProjectSanta.Views
         // Update is called once per frame
         private void FixedUpdate()
         {
-            if(RunGame && !pause)
+            if (RunGame && !pause)
                 initializeController.Update();
+            else if(timer <= 0f && !RunGame)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                timerText.text = "00:00";
+                endGame.Find("PlayerScore").GetComponent<Text>().text = References.playerController.Score.ToString();
+                endGame.gameObject.SetActive(true);
+            }
         }
 
         public void StartCoroutine(IEnumerator coroutine)
