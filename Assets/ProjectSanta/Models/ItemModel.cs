@@ -11,7 +11,7 @@ namespace ProjectSanta.Models
         HELD = 1,
         IN_SACK = 2,
         GROUNDED = 3,
-        IN_SLEIGH = 4
+        DUMPED = 4
     }
 
     internal enum Type

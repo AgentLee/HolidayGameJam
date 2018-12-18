@@ -64,7 +64,8 @@ namespace ProjectSanta.Controllers
                 }
                 else
                 {
-                    int personType = (int)listController.listModel.people[i].Type;
+                    PersonController person = listController.listModel.people[i];
+                    int personType = (int)person.Type;
                     int itemType = (int)Sack[i].Type;
 
                     sackModel.itemHolder.GetChild(i).GetComponent<Text>().enabled = true;
@@ -86,11 +87,11 @@ namespace ProjectSanta.Controllers
 
                     if(itemType == personType || itemType == 0)
                     {
-                        sackModel.itemHolder.GetChild(i).GetComponent<Text>().text += " good";
+                        sackModel.itemHolder.GetChild(i).GetComponent<Text>().text += " - " + person.Name; 
                     }
                     else
                     {
-                        sackModel.itemHolder.GetChild(i).GetComponent<Text>().text += " nope";
+                        sackModel.itemHolder.GetChild(i).GetComponent<Text>().text += " - " + person.Name; ;
                     }
 
                     sackModel.itemHolder.GetChild(i).GetComponent<Text>().color = color;
@@ -148,7 +149,10 @@ namespace ProjectSanta.Controllers
                     item.PointValue = -item.PointValue;
                 }
 
-                listController.UpdateList(idx);
+                if(item.itemModel.status != ItemStatus.DUMPED)
+                {
+                    listController.UpdateList(idx);
+                }
 
                 UpdateSackPoints();
 
@@ -164,7 +168,7 @@ namespace ProjectSanta.Controllers
             {
                 ItemController item = sackModel.items.Peek();
                 item.itemModel.transform.gameObject.SetActive(true);
-
+                item.itemModel.status = ItemStatus.DUMPED;
                 Debug.Log("Put " + item.Name + " on belt");
 
                 // Change shader of item

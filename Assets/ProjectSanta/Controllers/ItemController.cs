@@ -105,7 +105,6 @@ namespace ProjectSanta.Controllers
 
         internal void Destroy()
         {
-
             itemModel.transform.gameObject.SetActive(false);
             //References.sceneController.items.Remove(this);
             //GameObject.Destroy(itemModel.transform.gameObject);

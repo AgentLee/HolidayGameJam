@@ -138,74 +138,73 @@ namespace ProjectSanta.Controllers
                 // If player isn't holding anything, raycast to pick up nearest object.
                 if(!playerModel.holdingItem)
                 {
-                    ray = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-                    rayL = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(.75f, 0.5f, 0.0f));
-                    rayR = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.25f, 0.5f, 0.0f));
-                    Debug.DrawRay(ray.origin, ray.direction * playerModel.grabDistance, Color.blue);
-                    Debug.DrawRay(rayL.origin, rayL.direction * playerModel.grabDistance, Color.green);
-                    Debug.DrawRay(rayR.origin, rayR.direction * playerModel.grabDistance, Color.red);
+                    //ray = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+                    //rayL = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(.75f, 0.5f, 0.0f));
+                    //rayR = playerModel.camera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.25f, 0.5f, 0.0f));
+                    //Debug.DrawRay(ray.origin, ray.direction * playerModel.grabDistance, Color.blue);
+                    //Debug.DrawRay(rayL.origin, rayL.direction * playerModel.grabDistance, Color.green);
+                    //Debug.DrawRay(rayR.origin, rayR.direction * playerModel.grabDistance, Color.red);
 
-                    RaycastHit hit;
-                    bool intersects = Physics.Raycast(ray, out hit, playerModel.grabDistance);
+                    //RaycastHit hit;
+                    //bool intersects = Physics.Raycast(ray, out hit, playerModel.grabDistance);
 
-                    if (intersects)
-                    {
-                        Transform item = hit.transform;
-                        if (item.tag == "Item")
-                        {
-                            ItemController ic = References.sceneController.Find(item.name);
-
-                            if (ic != null)
-                            {
-                                Debug.Log("GRAB ITEM");
-
-                                playerModel.item = ic;
-                                playerModel.item.itemModel.transform.parent = playerModel.rightHand;
-                                playerModel.item.itemModel.transform.position = playerModel.rightHand.Find("Item").position;
-                                playerModel.holdingItem = true;
-
-                                ic.PickedUp();
-                            }
-                        }
-                    }
-
-                    //ItemController closest = null;
-                    //float minDist = Mathf.Infinity;
-                    //foreach (ItemController item in References.sceneController.items)
+                    //if (intersects)
                     //{
-                    //    Vector3 itemPos = item.Position;
-                    //    float dist = Vector3.Distance(itemPos, Position);
-
-                    //    if (dist < minDist && dist <= playerModel.grabDistance)
+                    //    Transform item = hit.transform;
+                    //    if (item.tag == "Item")
                     //    {
-                    //        minDist = dist;
-                    //        closest = item;
+                    //        ItemController ic = References.sceneController.Find(item.name);
+
+                    //        if (ic != null)
+                    //        {
+                    //            Debug.Log("GRAB ITEM");
+
+                    //            playerModel.item = ic;
+                    //            playerModel.item.itemModel.transform.parent = playerModel.rightHand;
+                    //            playerModel.item.itemModel.transform.position = playerModel.rightHand.Find("Item").position;
+                    //            playerModel.holdingItem = true;
+
+                    //            ic.PickedUp();
+                    //        }
                     //    }
                     //}
 
-                    //if (closest != null)
-                    //{
-                    //    playerModel.item = closest;
-                    //    playerModel.item.itemModel.transform.parent = playerModel.rightHand;
-                    //    playerModel.item.itemModel.transform.position = playerModel.rightHand.Find("Item").position;
-                    //    playerModel.holdingItem = true;
-                    //    closest.PickedUp();
-                    //}
-                    //else
-                    //{
-                    //    playerModel.holdingItem = false;
-                    //    playerModel.storingItem = false;
-                    //    playerModel.item = null;
-                    //}
+                    Debug.Log("NOT HOLDING");
+                    ItemController closest = null;
+                    float minDist = Mathf.Infinity;
+                    foreach (ItemController item in References.sceneController.items)
+                    {
+                        Vector3 itemPos = item.Position;
+                        float dist = Vector3.Distance(itemPos, Position);
+
+                        if (dist < minDist && dist <= playerModel.grabDistance && item.itemModel.status == ItemStatus.GROUNDED || item.itemModel.status == ItemStatus.DUMPED)
+                        {
+                            minDist = dist;
+                            closest = item;
+                        }
+                    }
+
+                    if (closest != null)
+                    {
+                        playerModel.item = closest;
+                        playerModel.item.itemModel.transform.parent = playerModel.rightHand;
+                        playerModel.item.itemModel.transform.position = playerModel.rightHand.Find("Item").position;
+                        playerModel.holdingItem = true;
+                        if(playerModel.item.itemModel.status != ItemStatus.DUMPED)
+                            playerModel.item.itemModel.status = ItemStatus.HELD;
+                        playerModel.item.PickedUp();
+                    }
                 }
                 // If player is already holding something, make sure object moves with the player.
                 // If the player presses Q, the item gets prepped to be stored in the sack
                 else
                 {
+                    Debug.Log("HOLDING");
                     playerModel.item.itemModel.transform.position = playerModel.rightHand.Find("Item").position;
 
                     if(qDown)
                     {
+                        Debug.Log("STORING");
                         playerModel.item.itemModel.transform.parent = playerModel.sack;
                         playerModel.storingItem = true;
                     }
@@ -213,13 +212,17 @@ namespace ProjectSanta.Controllers
             }
 
             // Store the object in the sack once the player lets go of Q.
-            if(!qDown && playerModel.storingItem)
+            if(!qDown && playerModel.storingItem && playerModel.item != null)
             {
-                playerModel.item.Dropped(false);
-                playerModel.sackController.AddToSack(playerModel.item, playerModel.listController);
-                playerModel.storingItem = false;
-                playerModel.holdingItem = false;
-                Debug.Log(playerModel.holdingItem);
+                if(playerModel.item.itemModel.status == ItemStatus.HELD)
+                {
+                    Debug.Log("STORED");
+                    playerModel.item.itemModel.status = ItemStatus.IN_SACK;
+                    playerModel.item.Dropped(false);
+                    playerModel.sackController.AddToSack(playerModel.item, playerModel.listController);
+                    playerModel.storingItem = false;
+                    playerModel.holdingItem = false;
+                }
             }
 
             // Player let go of left mouse, if they're holding something, let it go and reparent to the house.
@@ -227,11 +230,13 @@ namespace ProjectSanta.Controllers
             {
                 if(playerModel.holdingItem)
                 {
+                    Debug.Log("DROPPING ITEM");
+                    playerModel.item.itemModel.status = ItemStatus.GROUNDED;
                     playerModel.item.Dropped(true);
                     playerModel.item.itemModel.transform.parent = GameObject.Find("House").transform;
                     if(playerModel.item.IsOnConveyor())
                     {
-                        Debug.Log("ON THE CONVEYOR");
+                        Debug.Log("CONVEYOR");
                     }
                     playerModel.holdingItem = false;
                 }
