@@ -14,7 +14,7 @@ namespace ProjectSanta.Controllers
 
         Vector3 velocity = Vector3.zero;
         readonly float speed = 3f;
-        readonly float lookSensitivity = 3f;
+        readonly float lookSensitivity = 1.25f;
 
         Text scoreText;
         internal bool HoldingItem { get { return playerModel.holdingItem; } }
