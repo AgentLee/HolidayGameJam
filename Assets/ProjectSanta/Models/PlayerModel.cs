@@ -44,7 +44,7 @@ namespace ProjectSanta.Models
             //rigidBody.angularDrag = Mathf.Infinity;
             //rigidBody.drag = Mathf.Infinity;
             animator = rightHand.Find("Mitten").GetComponent<Animator>();
-            grabDistance = 2.5f;
+            grabDistance = 2f;
             highlightDistance = 10f;
             droppingDistance = 8f;
 

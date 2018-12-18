@@ -13,7 +13,7 @@ namespace ProjectSanta.Controllers
         PlayerModel playerModel;
 
         Vector3 velocity = Vector3.zero;
-        readonly float speed = 3f;
+        readonly float speed = 5f;
         readonly float lookSensitivity = 1.25f;
 
         Text scoreText;
@@ -168,6 +168,35 @@ namespace ProjectSanta.Controllers
                             }
                         }
                     }
+
+                    //ItemController closest = null;
+                    //float minDist = Mathf.Infinity;
+                    //foreach (ItemController item in References.sceneController.items)
+                    //{
+                    //    Vector3 itemPos = item.Position;
+                    //    float dist = Vector3.Distance(itemPos, Position);
+
+                    //    if (dist < minDist && dist <= playerModel.grabDistance)
+                    //    {
+                    //        minDist = dist;
+                    //        closest = item;
+                    //    }
+                    //}
+
+                    //if (closest != null)
+                    //{
+                    //    playerModel.item = closest;
+                    //    playerModel.item.itemModel.transform.parent = playerModel.rightHand;
+                    //    playerModel.item.itemModel.transform.position = playerModel.rightHand.Find("Item").position;
+                    //    playerModel.holdingItem = true;
+                    //    closest.PickedUp();
+                    //}
+                    //else
+                    //{
+                    //    playerModel.holdingItem = false;
+                    //    playerModel.storingItem = false;
+                    //    playerModel.item = null;
+                    //}
                 }
                 // If player is already holding something, make sure object moves with the player.
                 // If the player presses Q, the item gets prepped to be stored in the sack
@@ -190,6 +219,7 @@ namespace ProjectSanta.Controllers
                 playerModel.sackController.AddToSack(playerModel.item, playerModel.listController);
                 playerModel.storingItem = false;
                 playerModel.holdingItem = false;
+                Debug.Log(playerModel.holdingItem);
             }
 
             // Player let go of left mouse, if they're holding something, let it go and reparent to the house.
