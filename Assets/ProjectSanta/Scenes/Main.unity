@@ -2236,6 +2236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e58db3057206d48aad0d5f5c8cf048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scrollSpeedY: -0.285
   speed: 0.015
 --- !u!1001 &367943794
 PrefabInstance:

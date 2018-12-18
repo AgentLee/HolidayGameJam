@@ -8,6 +8,7 @@ namespace ProjectSanta.Controllers
     {
         internal List<ItemController> itemsToRemove;
 
+        public float scrollSpeedY = -0.25f;
         public float speed = 0.015f;
         // Start is called before the first frame update
         void Start()
@@ -18,6 +19,10 @@ namespace ProjectSanta.Controllers
         // Update is called once per frame
         void Update()
         {
+            float offsetY = Time.time * scrollSpeedY;
+
+            GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, offsetY);
+
             for(int i = 0; i < References.itemsOnBelt.Count; ++i)
             {
                 ItemController item = References.itemsOnBelt[i];
