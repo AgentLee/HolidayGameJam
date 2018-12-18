@@ -75,12 +75,12 @@ namespace ProjectSanta.Controllers
             rotation = rot;
             playerModel.rigidBody.MoveRotation(playerModel.rigidBody.rotation * Quaternion.Euler(rotation));
 
-            float rotX = Input.GetAxisRaw("Mouse Y");
-            Vector3 camRot = new Vector3(rotX, 0f, 0f) * lookSensitivity;
-            playerModel.camera.Rotate(-camRot);
-
+            float rotX = Input.GetAxisRaw("Mouse Y") * lookSensitivity;
+            currRotX -= rotX;
+            currRotX = Mathf.Clamp(currRotX, -60f, 60);
+            playerModel.camera.localEulerAngles = new Vector3(currRotX, 0f, 0f);
         }
-        Vector3 currRotX, currRotY;
+        float currRotX = 0, currRotY;
 
         bool mouseDown, tabDown, qDown, rDown;
 
