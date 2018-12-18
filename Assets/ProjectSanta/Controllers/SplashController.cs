@@ -53,6 +53,8 @@ public class SplashController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1f);
+
+        img.enabled = false;
     }
 
 }

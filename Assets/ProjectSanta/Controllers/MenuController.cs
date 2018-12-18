@@ -23,9 +23,9 @@ namespace ProjectSanta.Controllers
 //#if !UNITY_WEBGL
 //            exit.onClick.AddListener(delegate { ExitGame(); });
 //#else
-            if (SceneManager.GetActiveScene().name == "Menu")
-                exit.gameObject.SetActive(false);
-            else
+            //if (SceneManager.GetActiveScene().name == "Menu")
+            //    exit.gameObject.SetActive(false);
+            //else
                 exit.onClick.AddListener(delegate { ExitGame(); });
 //#endif
             showMenu = true;
@@ -58,6 +58,7 @@ namespace ProjectSanta.Controllers
             {
                 //SceneManager.LoadScene("Update 3");
                 Debug.Log("EXIT GAME");
+                Application.Quit();
             }
             else
             {

@@ -29,6 +29,7 @@ namespace ProjectSanta.Views
             initializeController = new InitializeController(player, house, list, sack);
 
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
             timerText = GameObject.Find("Timer").GetComponent<Text>();
             timer = 179;
@@ -72,10 +73,12 @@ namespace ProjectSanta.Views
             if (pause)
             {
                 Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
             }
             else
             {
                 Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
         }
 
@@ -113,6 +116,7 @@ namespace ProjectSanta.Views
             else if(timer <= 0f && !RunGame)
             {
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 timerText.text = "00:00";
                 endGame.Find("PlayerScore").GetComponent<Text>().text = References.playerController.Score.ToString();
                 endGame.gameObject.SetActive(true);
