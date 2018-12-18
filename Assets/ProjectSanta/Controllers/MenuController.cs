@@ -35,7 +35,7 @@ namespace ProjectSanta.Controllers
         {
             if (SceneManager.GetActiveScene().name == "Menu")
             {
-                SceneManager.LoadScene("Update 3");
+                SceneManager.LoadScene("Main");
             }
             else
             {

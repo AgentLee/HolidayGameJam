@@ -26,6 +26,7 @@ namespace ProjectSanta.Controllers
             {
                 if(item.itemModel.transform == other.transform)
                 {
+                    item.itemModel.transform.tag = "Untagged";
                     item.isWrapped = true;
                     break;
                 }

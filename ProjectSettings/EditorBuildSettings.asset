@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/ProjectSanta/Scenes/Menu.unity
     guid: c3ede1076555fb8438f39ac55dabbc42
   - enabled: 1
-    path: Assets/ProjectSanta/Scenes/Update 3.unity
-    guid: cee9402550691424288aed817a73634f
+    path: Assets/ProjectSanta/Scenes/Main.unity
+    guid: 2d7e2f70107962d4785613b5111060b7
   m_configObjects: {}
